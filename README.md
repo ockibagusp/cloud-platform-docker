@@ -16,7 +16,7 @@ $ docker run -d -p 3000:80 -p 27017:27017 -p 8080:8080 --name cloud-platform ock
 2. Import DB Schema
 
 ```bash
-$ docker cloud-platform exec 'mongorestore' '--db' 'agrihub' '/mongorestore/agrihub/'
+$ docker exec cloud-platform 'mongorestore' '--db' 'agrihub' '/mongorestore/agrihub/'
 ```
 
 # Services
