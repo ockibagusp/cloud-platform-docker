@@ -28,9 +28,20 @@ RUN mkdir -p /data/db /data/configdb \
 	&& chown -R mongodb:mongodb /data/db /data/configdb
 VOLUME /data/db
 
-# import db_schema
+COPY apache2.conf /etc/apache2/sites-enabled/000-default.conf
+
+# enabling mod_rewrite
+RUN a2enmod rewrite
+
+# prepare projects directory
+RUN pip install virtualenv  \
+    && virtualenv /projects/venv \
+    && mkdir -p /projects/angular /projects/django \
+    && cp /var/www/html/index.html /projects/angular \
+    && chown -R www-data:www-data /projects/angular
+
+# # import db_schema
 COPY db_schema /mongorestore
-# RUN mongorestore --db agrihub /mongorestore/agrihub/
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
