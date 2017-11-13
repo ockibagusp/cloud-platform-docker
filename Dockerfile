@@ -7,6 +7,7 @@ RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         apache2 \
+        libapache2-mod-wsgi \
         supervisor \
         git \
         vim \
@@ -30,15 +31,23 @@ VOLUME /data/db
 
 COPY apache2.conf /etc/apache2/sites-enabled/000-default.conf
 
-# enabling mod_rewrite
-RUN a2enmod rewrite
-
 # prepare projects directory
+WORKDIR /projects
 RUN pip install virtualenv  \
-    && virtualenv /projects/venv \
-    && mkdir -p /projects/angular /projects/django \
-    && cp /var/www/html/index.html /projects/angular \
-    && chown -R www-data:www-data /projects/angular
+    && virtualenv venv \
+    && mkdir -p angular django \
+    && cp /var/www/html/index.html angular \
+    && chown -R www-data:www-data angular
+COPY django /projects/django
+
+# install django dependencies
+WORKDIR /projects
+RUN . venv/bin/activate \
+    && pip install -r django/requirements.txt
+
+# enabling mod_rewrite
+RUN a2enmod rewrite \
+    && service apache2 restart
 
 # # import db_schema
 COPY db_schema /mongorestore
