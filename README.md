@@ -1,6 +1,35 @@
 # cloud-platform-docker
 Docker container-base Cloud-Platform
 
+# Preparation
+## Cloud-Platform (WebService)
+1. Clone repository from Bitbucket
+```bash
+$ git clone https://ockifals@bitbucket.org/ockifals/cloud-platform.git
+```
+
+## Web-Console (Single-Page Application)
+1. Clone repository from Bitbucket
+```bash
+$ git clone https://ockifals@bitbucket.org/ockifals/web-console.git
+```
+
+2. Change directory to cloned repo
+```bash
+$ cd /your-path/web-console
+```
+
+3. Install dependencies
+```bash
+$ npm install
+```
+
+4. Build
+```bash
+$ npm run prod-build
+```
+Build location: `/your-path/web-console/dist`
+
 # Instruction
 1. Build Image
 ```bash
