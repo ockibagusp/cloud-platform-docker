@@ -59,9 +59,4 @@ $ docker exec cloud-platform 'service' 'apache2' 'restart'
     - username: akundewa
     - password: admin123
 - Researcher
-    1. Subali
-    - username: subali
-    - password: admin123
-    2. Sugriwa
-    - username: sugriwa
-    - password: admin123
+    - please register your own
