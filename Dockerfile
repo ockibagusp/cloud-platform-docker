@@ -1,6 +1,7 @@
 FROM docker.io/ubuntu:14.04
 
-# add mongodb user and group first to make sure their IDs get assigned consistently
+# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+RUN groupadd -r agrihub && useradd -r --create-home -g agrihub agrihub
 RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 
 # install dependencies
@@ -49,10 +50,12 @@ RUN . venv/bin/activate \
 RUN a2enmod rewrite \
     && service apache2 restart
 
-# # import db_schema
+# import db_schema
 COPY db_schema /mongorestore
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80 8080 27017
+USER agrihub
+
 CMD ["/usr/bin/supervisord"]
