@@ -1,7 +1,6 @@
 FROM docker.io/ubuntu:14.04
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN groupadd -r agrihub && useradd -r --create-home -g agrihub agrihub
 RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 
 # install dependencies
@@ -47,15 +46,14 @@ RUN . venv/bin/activate \
     && pip install -r django/requirements.txt
 
 # enabling mod_rewrite
-RUN a2enmod rewrite \
-    && service apache2 restart
+RUN a2enmod rewrite
 
 # import db_schema
 COPY db_schema /mongorestore
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY djangodevserver.sh /
 
-EXPOSE 80 8080 27017
-USER agrihub
+EXPOSE 80 8080 8000 27017
 
 CMD ["/usr/bin/supervisord"]
