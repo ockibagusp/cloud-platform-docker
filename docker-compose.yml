@@ -1,0 +1,16 @@
+version: "3"
+services:
+  cloud-platform:
+    build: "."
+    ports:
+    - "3000:80"
+    - "8080:8080"
+    - "8000:8000"
+    - "27017:27017"
+    environment:
+      # set ENV to DEV to activate django hot reload
+      ENV: PROD
+    volumes:
+    # remember to change your-path
+    - "/your-path/web-console/dist:/projects/angular"
+    - "/your-path/cloud_platform:/projects/django"

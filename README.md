@@ -31,6 +31,8 @@ Build location: `/your-path/web-console/dist`
 
 # Instruction
 
+## Build and run using Dockerfile
+
 1. Build Image
     ```bash
     $ docker build -t ockifals/cloud-platform .
@@ -39,13 +41,13 @@ Build location: `/your-path/web-console/dist`
 
 * production mode
     ```bash
-    $ docker run -d -p 3000:80 -p 27017:27017 -p 8080:8080 --name [container-name] -v /your-path/web-console/dist/:/projects/angular -v /your-path/cloud-platform:/projects/django ockifals/cloud-platform
+    $ docker run -d -p 3000:80 -p 27017:27017 -p 8080:8080 --name [container-name] -v /your-path/web-console/dist:/projects/angular -v /your-path/cloud-platform:/projects/django ockifals/cloud-platform
     ```
 * development mode
 
     comes with ability to reload code without restarting container
     ```bash
-    $ docker run -d -e "ENV=DEV" -p 3000:80 -p 27017:27017 -p 8000:8000 --name [container-name] -v /your-path/web-console/dist/:/projects/angular -v /your-path/cloud-platform:/projects/django ockifals/cloud-platform
+    $ docker run -d -e "ENV=DEV" -p 3000:80 -p 27017:27017 -p 8000:8000 --name [container-name] -v /your-path/web-console/dist:/projects/angular -v /your-path/cloud-platform:/projects/django ockifals/cloud-platform
     ```
     
 3. Import DB Schema
@@ -56,6 +58,36 @@ Build location: `/your-path/web-console/dist`
 4. Run django-dev-server (*in development mode)
     ```bash
     docker exec [container-name] '/djangodevserver.sh'
+    ```
+
+## Build and run using docker-compose.yml
+⚠️ remember to change docker-compose.yml before building an image
+
+* change __'your-path'__ to path you use to clone repo __*cloud-platform*__ and __*web-console*__
+
+* run in production mode (*default)
+
+    set __'ENV'__ to __'PROD'__ in docker-compose.yml
+    
+* run in development mode
+
+    comes with ability to reload code without restarting container.
+
+    set __'ENV'__ to __'DEV'__ in docker-compose.yml
+
+1. Build Image and Run New Container
+    ```bash
+    $ docker-compose up -d
+    ```
+
+2. Import DB Schema
+    ```bash
+    $ docker-compose exec cloud-platform 'mongorestore' '--db' 'agrihub' '/mongorestore/agrihub/'
+    ``` 
+
+3. Run django-dev-server (*in development mode)
+    ```bash
+    docker-compose exec cloud-platform '/djangodevserver.sh'
     ```
 
 # Services
