@@ -27,7 +27,6 @@ RUN apt-get update \
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/log/supervisor
 RUN mkdir -p /data/db /data/configdb \
 	&& chown -R mongodb:mongodb /data/db /data/configdb
-VOLUME /data/db
 
 COPY apache2.conf /etc/apache2/sites-enabled/000-default.conf
 
@@ -38,7 +37,8 @@ RUN pip install virtualenv  \
     && mkdir -p angular django \
     && cp /var/www/html/index.html angular \
     && chown -R www-data:www-data angular
-COPY django /projects/django
+COPY cloud-platform /projects/django
+COPY web-console/dist /projects/angular
 
 # install django dependencies
 WORKDIR /projects
@@ -52,8 +52,7 @@ RUN a2enmod rewrite
 COPY db_schema /mongorestore
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY djangodevserver.sh /
 
-EXPOSE 80 8080 8000 27017
+EXPOSE 80 8080 27017
 
 CMD ["/usr/bin/supervisord"]
