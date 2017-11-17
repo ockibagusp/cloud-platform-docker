@@ -6,35 +6,36 @@ Docker container-base Cloud-Platform
 
 1. Clone repository from Bitbucket
 
-    ```bash
-    $ git clone https://ockifals@bitbucket.org/ockifals/cloud-platform.git
-    ```
+```bash
+$ git clone https://ockifals@bitbucket.org/ockifals/cloud-platform.git
+```
 
 ## Web-Console (Single-Page Application)
 
 1. Clone repository from Bitbucket
 
-    ```bash
-    $ git clone https://ockifals@bitbucket.org/ockifals/web-console.git
-    ```
+```bash
+$ git clone https://ockifals@bitbucket.org/ockifals/web-console.git
+```
 
 2. Change directory to cloned repo
 
-    ```bash
-    $ cd /y
-    our-path/web-console
-    ```
+```bash
+$ cd /y
+our-path/web-console
+```
+
 3. Install dependencies
 
-    ```bash
-    $ npm install
-    ```
+```bash
+$ npm install
+```
 
 4. Build
 
-    ```bash
-    $ npm run prod-build
-    ```
+```bash
+$ npm run prod-build
+```
 
 Build location: `/your-path/web-console/dist`
 
@@ -44,38 +45,37 @@ Build location: `/your-path/web-console/dist`
 
 1. Build Image
 
-
-    ```bash
-    $ docker build -t ockifals/cloud-platform .
-    ```
+```bash
+$ docker build -t ockifals/cloud-platform .
+```
 
 2. Run image
 
 * production mode
 
-    ```bash
-    $ docker run -d -p 3000:80 -p 27017:27017 -p 8080:8080 --name [container-name] -v /your-path/web-console/dist:/projects/angular -v /your-path/cloud-platform:/projects/django ockifals/cloud-platform
-    ```
+```bash
+$ docker run -d -p 3000:80 -p 27017:27017 -p 8080:8080 --name [container-name] -v /your-path/web-console/dist:/projects/angular -v /your-path/cloud-platform:/projects/django ockifals/cloud-platform
+```
 
 * development mode
 
     comes with ability to reload code without restarting container
 
-    ```bash
-    $ docker run -d -e "ENV=DEV" -p 3000:80 -p 27017:27017 -p 8000:8000 --name [container-name] -v /your-path/web-console/dist:/projects/angular -v /your-path/cloud-platform:/projects/django ockifals/cloud-platform
-    ```
+```bash
+$ docker run -d -e "ENV=DEV" -p 3000:80 -p 27017:27017 -p 8000:8000 --name [container-name] -v /your-path/web-console/dist:/projects/angular -v /your-path/cloud-platform:/projects/django ockifals/cloud-platform
+```
     
 3. Import DB Schema
 
-    ```bash
-    $ docker exec [container-name] 'mongorestore' '--db' 'agrihub' '/mongorestore/agrihub/'
-    ``` 
+```bash
+$ docker exec [container-name] 'mongorestore' '--db' 'agrihub' '/mongorestore/agrihub/'
+``` 
 
 4. Run django-dev-server (*in development mode)
 
-    ```bash
-    docker exec [container-name] '/djangodevserver.sh'
-    ```
+```bash
+docker exec [container-name] '/djangodevserver.sh'
+```
 
 ## Build and run using docker-compose.yml
 ⚠️ remember to change docker-compose.yml before building an image
@@ -94,21 +94,21 @@ Build location: `/your-path/web-console/dist`
 
 1. Build image and run new container
 
-    ```bash
-    $ docker-compose up -d
-    ```
+```bash
+$ docker-compose up -d
+```
 
 2. Import DB Schema
 
-    ```bash
-    $ docker-compose exec cloud-platform 'mongorestore' '--db' 'agrihub' '/mongorestore/agrihub/'
-    ``` 
+```bash
+$ docker-compose exec cloud-platform 'mongorestore' '--db' 'agrihub' '/mongorestore/agrihub/'
+``` 
 
 3. Run django-dev-server (*in development mode)
 
-    ```bash
-    docker-compose exec cloud-platform '/djangodevserver.sh'
-    ```
+```bash
+docker-compose exec cloud-platform '/djangodevserver.sh'
+```
 
 # Services
 * 3000 -> Single-Page Application
