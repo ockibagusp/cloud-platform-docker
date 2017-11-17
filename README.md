@@ -113,7 +113,7 @@ docker-compose exec cloud-platform '/djangodevserver.sh'
 # Services
 * 3000 -> Single-Page Application
 * 8080 -> RESTful WebService (production mode)
-* 8080 -> RESTful WebService (development mode)
+* 8000 -> RESTful WebService (development mode)
 * 27017 -> MongoDB
 
 # User Accounts
