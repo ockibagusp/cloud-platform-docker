@@ -13,4 +13,4 @@ services:
     volumes:
     # remember to change your-path
     - "/your-path/web-console/dist:/projects/angular"
-    - "/your-path/cloud_platform:/projects/django"
+    - "/your-path/cloud-platform:/projects/django"
