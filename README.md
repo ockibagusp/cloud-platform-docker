@@ -7,7 +7,7 @@ Docker container-base Cloud-Platform
 1. Clone repository from Bitbucket
 
 ```bash
-$ git clone https://ockifals@bitbucket.org/ockifals/cloud-platform.git
+$ git clone https://github.com/OckiFals/cloud-platform-docker.git
 ```
 
 ## Web-Console (Single-Page Application)
@@ -21,8 +21,7 @@ $ git clone https://ockifals@bitbucket.org/ockifals/web-console.git
 2. Change directory to cloned repo
 
 ```bash
-$ cd /y
-our-path/web-console
+$ cd /your-path/web-console
 ```
 
 3. Install dependencies
