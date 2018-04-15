@@ -15,7 +15,7 @@ $ git clone https://github.com/OckiFals/cloud-platform-docker.git
 1. Clone repository from Bitbucket
 
 ```bash
-$ git clone https://ockifals@bitbucket.org/ockifals/web-console.git
+$ git clone https://github.com/OckiFals/web-console.git
 ```
 
 2. Change directory to cloned repo
