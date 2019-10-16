@@ -4,7 +4,7 @@ Docker container-base Cloud-Platform
 # Preparation
 ## Cloud-Platform (WebService)
 
-1. Clone repository from Bitbucket
+1. Clone repository from Github
 
 ```bash
 $ git clone https://github.com/OckiFals/cloud-platform-docker.git
@@ -12,7 +12,7 @@ $ git clone https://github.com/OckiFals/cloud-platform-docker.git
 
 ## Web-Console (Single-Page Application)
 
-1. Clone repository from Bitbucket
+1. Clone repository from Github
 
 ```bash
 $ git clone https://github.com/OckiFals/web-console.git
